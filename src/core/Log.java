@@ -21,10 +21,8 @@ public class Log {
 	
 	
 	public String getData() {
-		String data = timestamp + ", " + "client id: " + client_id + " " + description + "amount: " + amount;
+		String data = "Log [timestamp=" + timestamp + ", " + "client id: " + client_id + ", description: " + description + ", amount: " + amount + "]";
 		return data;
 	}
-	
-	
 
 }

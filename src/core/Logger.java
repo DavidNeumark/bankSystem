@@ -10,7 +10,7 @@ public class Logger {
 	}
 	
 	public void log(Log log) {
-		System.out.println(log);
+		System.out.println(log.getData());
 	}
 	
 	public Log[] getLogs(Log[] logs) {

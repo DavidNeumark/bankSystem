@@ -99,7 +99,7 @@ public class Client {
 		}
 	}
 	
-	public float getFortune(Account account) {
+	public float getFortune() {
 		
 		float fortune = 0;
 		for (int i = 0; i < accounts.length; i++) {
