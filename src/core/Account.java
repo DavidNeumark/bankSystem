@@ -12,13 +12,9 @@ public class Account {
 		this.balance = balance;
 	}
 	
-	
-
 	public float getBalance() {
 		return balance;
 	}
-
-
 
 	public void setBalance(float balance) {
 		this.balance = balance;
@@ -26,19 +22,18 @@ public class Account {
 		logger.log(log);
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
 
-	public void transaction(Client client, float deposit) {
-		float new_balance = client.getBalance() + deposit;
+	public void deposit(float deposit) {
+		float new_balance = this.getBalance() + deposit;
+		this.setBalance(new_balance);
+	}
+	
+	public void withdraw(Client client, float withdraw) {
+		float new_balance = client.getBalance() - withdraw;
 		client.setBalance(new_balance);
 	}
 	
-	public void autoUpdateAccounts() {
-		
-	}
-
 }

@@ -5,7 +5,7 @@ public class Client {
 	private int id;
 //	private String rank;
 	private String name;
-	private float balance;
+	private float balance = 0;
 	private Account[] accounts = new Account[5];
 	private float commission_rate = 0;
 	private float interest_rate = 0;
@@ -68,10 +68,44 @@ public class Client {
 				Log log = new Log(System.currentTimeMillis(), this.id, "remove_account", accounts[i].getBalance());
 				logger.log(log);
 				accounts[i] = null;
-				
-				
 			}
 		}
+	}
+	
+	public void deposit(float amount, int account_id) {
+		Account account = this.getAccount(account_id);
+		amount = balance + amount + commission_rate;
+		account.setBalance(amount);				
+		Log log = new Log(System.currentTimeMillis(), this.id, "deposit", account.getBalance());
+		logger.log(log);
+	}
+	
+	public void withdraw(float amount, int account_id) {
+		Account account = this.getAccount(account_id);
+		amount = balance + amount - commission_rate;
+		account.setBalance(amount);				
+		Log log = new Log(System.currentTimeMillis(), this.id, "withdraw", account.getBalance());
+		logger.log(log);
+	}
+	
+	public void autoUpdateAccounts() {
+		for (int i = 0; i < accounts.length; i++) {
+			if(accounts[i] != null) {
+				float amount_to_add = accounts[i].getBalance() * (interest_rate / 100 );
+				accounts[i].deposit(amount_to_add);
+				Log log = new Log(System.currentTimeMillis(), this.id, "autoUpdateAccounts", accounts[i].getBalance());
+				logger.log(log);
+			}
+		}
+	}
+	
+	public float getFortune(Account account) {
+		
+		float fortune = 0;
+		for (int i = 0; i < accounts.length; i++) {
+			fortune = this.getBalance() + accounts[i].getBalance();
+		}
+		return fortune;
 	}
 	
 }
