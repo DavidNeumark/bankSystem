@@ -1,5 +1,7 @@
 package core;
 
+import java.util.Arrays;
+
 public class Client {
 	
 	private int id;
@@ -7,7 +9,7 @@ public class Client {
 	private String name;
 	private float balance = 0;
 	private Account[] accounts = new Account[5];
-	private float commission_rate = 0;
+	private float commission_rate = 4;
 	private float interest_rate = 0;
 	private Logger logger;
 	
@@ -58,7 +60,7 @@ public class Client {
 	}
 	
 	public Account getAccount(int index) {
-		return accounts[index];
+		return accounts[index-1];
 	}
 
 	public void remove_account (int id) {
@@ -82,7 +84,8 @@ public class Client {
 	
 	public void withdraw(float amount, int account_id) {
 		Account account = this.getAccount(account_id);
-		amount = balance + amount - commission_rate;
+//		balance = account.getBalance();
+		amount = balance - amount + commission_rate;
 		account.setBalance(amount);				
 		Log log = new Log(System.currentTimeMillis(), this.id, "withdraw", account.getBalance());
 		logger.log(log);
@@ -100,12 +103,22 @@ public class Client {
 	}
 	
 	public float getFortune() {
-		
 		float fortune = 0;
 		for (int i = 0; i < accounts.length; i++) {
-			fortune = this.getBalance() + accounts[i].getBalance();
+			if(accounts[i] != null) {
+				fortune = this.getBalance() + accounts[i].getBalance();
+			}
 		}
+		Log log = new Log(System.currentTimeMillis(), this.id, "getFortune", fortune);
+		logger.log(log);
 		return fortune;
+	}
+
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", name=" + name + ", balance=" + balance + ", accounts="
+				+ Arrays.toString(accounts) + ", commission_rate=" + commission_rate + ", interest_rate="
+				+ interest_rate + ", logger=" + logger + "]";
 	}
 	
 }

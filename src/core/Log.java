@@ -1,6 +1,8 @@
 package core;
 
 public class Log {
+
+
 	private long timestamp;
 	private int client_id;
 	private String description;
@@ -19,10 +21,9 @@ public class Log {
 		this(System.currentTimeMillis(), client_id, description, amount);
 	}
 	
-	
 	public String getData() {
-		String data = "Log [timestamp=" + timestamp + ", " + "client id: " + client_id + ", description: " + description + ", amount: " + amount + "]";
-		return data;
+		return "Log [timestamp=" + timestamp + ", client_id=" + client_id + ", description=" + description + ", amount="
+				+ amount + "]";
 	}
 
 }

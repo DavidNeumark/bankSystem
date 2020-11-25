@@ -13,13 +13,13 @@ public class Account {
 	}
 	
 	public float getBalance() {
-		return balance;
+		return this.balance;
 	}
 
 	public void setBalance(float balance) {
 		this.balance = balance;
-		Log log = new Log(System.currentTimeMillis(), this.id, "setBalance", balance);
-		logger.log(log);
+//		Log log = new Log(System.currentTimeMillis(), this.id, "setBalance", balance);
+//		logger.log(log);
 	}
 
 	public int getId() {
@@ -35,5 +35,14 @@ public class Account {
 		float new_balance = client.getBalance() - withdraw;
 		client.setBalance(new_balance);
 	}
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", balance=" + balance + ", logger=" + logger + "]";
+	}
+	
+	
+	
+	
 	
 }

@@ -2,16 +2,26 @@ package core;
 
 public class Bank {
 	
-	Client[] clients = new Client[100];
-	Logger logService;
+	private static Bank bank_instance = null;
+	private static float commissionSum;
+	
+	private Client[] clients = new Client[100];
+	private Logger logService;
 //	account updater
-	Logger logger;
-	float bankBalance;
+	private Logger logger;
+	private float bankBalance;
 	
 	
-	public Bank() {
+	private Bank() {
 		super();
 	}
+	
+	public static Bank getInstance() { 
+		if (bank_instance == null) 
+			bank_instance = new Bank(); 
+	  
+	        return bank_instance; 
+	} 
 	
 	// this operation returns the bank balance.
 	// The balance is calculated by summing the total
@@ -57,7 +67,5 @@ public class Bank {
 	public void startAccountUpdater() {
 		
 	}
-	
-	
 
 }
