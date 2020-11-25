@@ -4,7 +4,7 @@ public class Account {
 	
 	private int id;
 	private float balance;
-	private Logger logger;
+	private Logger logger = new Logger("driver name");
 	
 	public Account(int id, float balance) {
 		super();
@@ -18,8 +18,8 @@ public class Account {
 
 	public void setBalance(float balance) {
 		this.balance = balance;
-//		Log log = new Log(System.currentTimeMillis(), this.id, "setBalance", balance);
-//		logger.log(log);
+		Log log = new Log(System.currentTimeMillis(), this.id, "setBalance", balance);
+		logger.log(log);
 	}
 
 	public int getId() {

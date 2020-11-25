@@ -6,7 +6,7 @@ import core.Client;
 public class ClientTest {
 	public static void main(String[] args) {
 		
-		Client client1 = new Client(1, "clinet 1", 100);
+		Client client1 = new Client(1, "client 1", 100);
 		Client client2 = new Client(2, "client 2", 200);
 		
 		Account account1 = new Account(1, 10);
