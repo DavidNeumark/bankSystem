@@ -9,7 +9,7 @@ public class Client {
 	private String name;
 	private float balance = 0;
 	private Account[] accounts = new Account[5];
-	private float commission_rate = 4;
+	private float commission_rate = 0;
 	private float interest_rate = 0;
 	private Logger logger;
 	
@@ -62,7 +62,19 @@ public class Client {
 	public Account getAccount(int index) {
 		return accounts[index-1];
 	}
-
+	
+	public Account getAccountById(int account_id) {
+		Account account = null;
+		for (int i = 0; i < accounts.length; i++) {
+			if(accounts[i].getId() == account_id) {
+				account = accounts[i];
+				break;
+			}
+		}
+		
+		return account;
+	}
+	
 	public void remove_account (int id) {
 		for (int i = 0; i < accounts.length; i++) {
 			if(accounts[i].getId() == id){
@@ -75,18 +87,17 @@ public class Client {
 	}
 	
 	public void deposit(float amount, int account_id) {
-		Account account = this.getAccount(account_id);
-		amount = balance + amount + commission_rate;
-		account.setBalance(amount);				
+		Account account = this.getAccountById(account_id);
+		float temp_amount = amount + commission_rate;
+		account.deposit(temp_amount);				
 		Log log = new Log(System.currentTimeMillis(), this.id, "deposit", account.getBalance());
 		logger.log(log);
 	}
 	
 	public void withdraw(float amount, int account_id) {
-		Account account = this.getAccount(account_id);
-//		balance = account.getBalance();
-		amount = balance - amount + commission_rate;
-		account.setBalance(amount);				
+		Account account = this.getAccountById(account_id);
+		float temp_amount = amount - commission_rate;
+		account.withdraw(temp_amount);				
 		Log log = new Log(System.currentTimeMillis(), this.id, "withdraw", account.getBalance());
 		logger.log(log);
 	}
@@ -103,10 +114,10 @@ public class Client {
 	}
 	
 	public float getFortune() {
-		float fortune = 0;
+		float fortune = this.getBalance();
 		for (int i = 0; i < accounts.length; i++) {
 			if(accounts[i] != null) {
-				fortune = this.getBalance() + accounts[i].getBalance();
+				fortune = fortune + accounts[i].getBalance();
 			}
 		}
 		Log log = new Log(System.currentTimeMillis(), this.id, "getFortune", fortune);

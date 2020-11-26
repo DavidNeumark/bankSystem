@@ -4,7 +4,7 @@ public class Account {
 	
 	private int id;
 	private float balance;
-	private Logger logger = new Logger("driver name");
+	private Logger logger = new Logger("driver 1");
 	
 	public Account(int id, float balance) {
 		super();
@@ -27,13 +27,11 @@ public class Account {
 	}
 
 	public void deposit(float deposit) {
-		float new_balance = this.getBalance() + deposit;
-		this.setBalance(new_balance);
+		this.setBalance(this.getBalance() + deposit);
 	}
 	
-	public void withdraw(Client client, float withdraw) {
-		float new_balance = client.getBalance() - withdraw;
-		client.setBalance(new_balance);
+	public void withdraw(float withdraw) {
+		this.setBalance(this.getBalance() - withdraw);
 	}
 
 	@Override

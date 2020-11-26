@@ -16,9 +16,9 @@ public class ClientTest {
 		client1.addAccount(account1);
 		client1.addAccount(account2);
 		
-		client1.withdraw(131, 2);
-		client1.deposit(22, 1);
-//		
+		client1.withdraw(2, 1);
+		client1.deposit(3, 1);
+		
 		client1.getFortune();
 	}
 
